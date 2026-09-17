@@ -15,6 +15,8 @@ class Dragon:
 
     name: str
     health: int = 0
+    x: int = 0
+    y: int = 0
 
     def __post_init__(self) -> None:
         """Validate dragon attributes after initialization."""

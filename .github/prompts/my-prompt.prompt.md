@@ -48,7 +48,7 @@ Reference:
 
 ## Reference
 
-- Implementation guidelines: [copilot-instructions.md](../instructions/copilot-instructions.md)
-- Project-specific details: [DRAGON.md](../instructions/DRAGON.md)
+- Implementation guidelines: [copilot-instructions.md](../copilot-instructions.md)
+- Project-specific details: [DRAGON.md](../instructions/dragon.instructions.md)
 
 

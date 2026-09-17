@@ -17,6 +17,7 @@ The Dragon project is an MVP business requirements exercise. Treat it as a progr
    - Implement only what's requested
    - Extend previous sprint code
    - Keep code minimal and focused
+   - Add docstrings to all new functions and classes
 
 4. **Write tests**
    - Add tests for new behavior
@@ -30,7 +31,6 @@ The Dragon project is an MVP business requirements exercise. Treat it as a progr
 
 ## Principles
 - Respect the brief: you are the programmer, not the PO
-- Do not read ahead into later sprints
 - Keep solutions focused on stated requirements
 - Prefer TDD, KISS, DRY, SOLID
 - Avoid over-engineering
