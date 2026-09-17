@@ -80,3 +80,10 @@ class Dragon:
     def make_damage(self) -> int:
         """Return a random amount of damage between 5 and 20."""
         return randint(5, 20)
+
+    def take_damage(self, damage: int) -> None:
+        """Reduce health by damage without allowing it to become negative."""
+        self._validate_integer(damage, "damage")
+        if damage < 0:
+            raise DragonError("damage must not be negative")
+        self.health = max(0, self.health - damage)

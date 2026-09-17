@@ -110,6 +110,36 @@ class DragonDamageTestCase(TestCase):
             randint_mock.call_args_list,
         )
 
+    def test_dragon_takes_damage(self) -> None:
+        """Taking damage should reduce the dragon's health."""
+        dragon = Dragon(name="Wawelski")
+        dragon.health = 3
+
+        dragon.take_damage(2)
+
+        self.assertEqual(1, dragon.health)
+
+    def test_dragon_health_cannot_become_negative(self) -> None:
+        """Damage greater than health should leave zero health."""
+        dragon = Dragon(name="Wawelski")
+        dragon.health = 3
+
+        dragon.take_damage(5)
+
+        self.assertEqual(0, dragon.health)
+
+    def test_invalid_damage_is_rejected_without_changing_health(self) -> None:
+        """Damage must be a non-negative integer."""
+        dragon = Dragon(name="Wawelski")
+        dragon.health = 3
+
+        for invalid_damage in (True, False, None, 1.5, "2", -1):
+            with self.subTest(invalid_damage=invalid_damage):
+                with self.assertRaises(DragonError):
+                    dragon.take_damage(invalid_damage)
+
+                self.assertEqual(3, dragon.health)
+
 
 class DragonPositionTestCase(TestCase):
     """Cover dragon position scenarios."""

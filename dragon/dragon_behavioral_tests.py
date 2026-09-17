@@ -207,6 +207,25 @@ class DragonDamageBehaviorTestCase(TestCase):
         self.assertGreaterEqual(damage, 5)
         self.assertLessEqual(damage, 20)
 
+    def test_scenario_dragon_can_take_damage(self) -> None:
+        """A dragon with three health taking two damage has one health left."""
+        dragon = Dragon(name="Wawelski")
+        dragon.health = 3
+
+        dragon.take_damage(2)
+
+        self.assertEqual(1, dragon.health)
+
+    def test_use_case_applies_the_documented_damage_values(self) -> None:
+        """The documented damage sequence reduces health and stops at zero."""
+        dragon = Dragon(name="Wawelski")
+        dragon.health = 100
+
+        for damage in (10, 20, 30, 40, 50):
+            dragon.take_damage(damage)
+
+        self.assertEqual(0, dragon.health)
+
 
 if __name__ == "__main__":
     main()

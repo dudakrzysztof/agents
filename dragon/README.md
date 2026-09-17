@@ -14,6 +14,7 @@ coordinate-based game or simulation prototypes.
 - Move by a signed `(x, y)` offset in one operation.
 - Move in a single direction when a directional method is more expressive.
 - Generate random damage between 5 and 20 inclusive.
+- Receive damage while keeping health at or above zero.
 
 ## Requirements
 
@@ -73,8 +74,17 @@ damage = dragon.make_damage()
 assert 5 <= damage <= 20
 ```
 
-The damage value is returned to the caller; the current implementation does
-not apply damage to another object or reduce the dragon's own health.
+The generated value can be applied to a dragon with `take_damage()`:
+
+```python
+dragon.health = 3
+dragon.take_damage(2)
+
+assert dragon.health == 1
+```
+
+`take_damage()` rejects negative or non-integer values and never reduces
+health below zero.
 
 ### Handling invalid names
 
@@ -105,6 +115,7 @@ movement offsets must be integers (not booleans); invalid values raise
 | `move_right(value)` / `move_left(value)` | Change the x coordinate. |
 | `move_down(value)` / `move_up(value)` | Change the y coordinate. |
 | `make_damage()` | Return a random integer from 5 to 20 inclusive. |
+| `take_damage(damage)` | Reduce health by a non-negative integer, down to zero. |
 
 ## Project structure
 
