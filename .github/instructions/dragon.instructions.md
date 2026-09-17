@@ -50,3 +50,6 @@ dragon/
 ├── dragon_tests.py      - unit tests
 └── README.md            - current capabilities
 ```
+
+## Prompt Reference
+- Use [my-prompt.prompt.md](../prompts/my-prompt.prompt.md) as a reference when structuring task prompts.
