@@ -30,5 +30,24 @@ class DragonCreateTestCase(TestCase):
         self.assertEqual("Dragon name cannot be empty", str(context.exception))
 
 
+class DragonHealthTestCase(TestCase):
+    """Cover dragon health scenarios."""
+
+    def test_dragon_has_random_health_on_creation(self) -> None:
+        """A created dragon should have random health between 50 and 100."""
+        dragon = Dragon(name="Wawelski")
+
+        self.assertIsNotNone(dragon.health)
+        self.assertGreaterEqual(dragon.health, 50)
+        self.assertLessEqual(dragon.health, 100)
+
+    def test_dragon_health_varies_between_creations(self) -> None:
+        """Multiple dragons should have different health values."""
+        dragons = [Dragon(name=f"Dragon{i}") for i in range(10)]
+        health_values = [dragon.health for dragon in dragons]
+
+        self.assertGreater(len(set(health_values)), 1)
+
+
 if __name__ == "__main__":
     main()
