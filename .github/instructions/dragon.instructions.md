@@ -11,15 +11,19 @@ The Dragon project is an MVP business requirements exercise. Treat it as a progr
    - Ensure all tests pass before starting
 
 2. **Review sprint requirements**
-   - Read the current sprint requirements from `.github\instructions\sprint\`.
-   - Use the highest-numbered `sprint-XX.md` file as the current sprint.
-   - Treat the local sprint file as authoritative and do not fetch external sprint pages when it exists.
+   - When the user says `robimy Sprint N`, read `.github\instructions\sprint\sprint-N.md`.
+   - If the file does not exist, ask the user to create it; do not fetch requirements from the web.
+   - Treat the selected local sprint file as authoritative.
 
 3. **Implement focused solution**
    - Implement only what's requested
    - Extend previous sprint code
    - Keep code minimal and focused
    - Add docstrings to all new functions and classes
+   - Add or update tests and update `/dragon/README.md`
+   - Run the test suite after implementation
+   - Create a commit named `Sprint NN: ...`
+   - Push only when the user explicitly requests it
 
 4. **Write tests**
    - Add tests for new behavior
