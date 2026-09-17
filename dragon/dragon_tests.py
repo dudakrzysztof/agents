@@ -1,6 +1,7 @@
 """Tests for the dragon project."""
 
 from unittest import TestCase, main
+from unittest.mock import call, patch
 
 from dragon import Dragon, DragonError
 
@@ -50,6 +51,33 @@ class DragonHealthTestCase(TestCase):
         health_values = [dragon.health for dragon in dragons]
 
         self.assertGreater(len(set(health_values)), 1)
+
+
+class DragonDamageTestCase(TestCase):
+    """Cover dragon damage scenarios."""
+
+    def test_dragon_makes_damage_between_five_and_twenty(self) -> None:
+        """A dragon should make damage within the sprint-defined range."""
+        dragon = Dragon(name="Wawelski")
+
+        damage = dragon.make_damage()
+
+        self.assertIsInstance(damage, int)
+        self.assertGreaterEqual(damage, 5)
+        self.assertLessEqual(damage, 20)
+
+    def test_dragon_makes_damage_at_inclusive_bounds(self) -> None:
+        """Damage generation should include both range boundaries."""
+        dragon = Dragon(name="Wawelski")
+
+        with patch("dragon.dragon.randint", side_effect=[5, 20]) as randint_mock:
+            self.assertEqual(5, dragon.make_damage())
+            self.assertEqual(20, dragon.make_damage())
+
+        self.assertEqual(
+            [call(5, 20), call(5, 20)],
+            randint_mock.call_args_list,
+        )
 
 
 class DragonPositionTestCase(TestCase):

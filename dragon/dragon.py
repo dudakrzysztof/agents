@@ -48,3 +48,7 @@ class Dragon:
     def move_up(self, value: int) -> None:
         """Move the dragon up by the requested value."""
         self.position_y -= value
+
+    def make_damage(self) -> int:
+        """Return a random amount of damage between 5 and 20."""
+        return randint(5, 20)

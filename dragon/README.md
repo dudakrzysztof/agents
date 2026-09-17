@@ -34,3 +34,4 @@ The project currently supports:
 - Relative movement uses `Dragon.move_right()`, `Dragon.move_left()`,
   `Dragon.move_down()`, and `Dragon.move_up()`. Right and down increase the
   corresponding coordinate; left and up decrease it.
+- Returning random damage between 5 and 20 through `Dragon.make_damage()`.

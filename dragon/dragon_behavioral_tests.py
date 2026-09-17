@@ -102,5 +102,20 @@ class DragonPositionBehaviorTestCase(TestCase):
         self._then_position_is(dragon, position_x=20, position_y=40)
 
 
+class DragonDamageBehaviorTestCase(TestCase):
+    """Cover the Sprint 08 damage scenario."""
+
+    def test_scenario_dragon_can_make_random_damage_between_five_and_twenty(
+        self,
+    ) -> None:
+        """A named dragon should make damage between 5 and 20."""
+        dragon = Dragon(name="Wawelski")
+
+        damage = dragon.make_damage()
+
+        self.assertGreaterEqual(damage, 5)
+        self.assertLessEqual(damage, 20)
+
+
 if __name__ == "__main__":
     main()
