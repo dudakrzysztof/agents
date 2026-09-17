@@ -77,6 +77,15 @@ class DragonPositionTestCase(TestCase):
 
         self.assertEqual("(1, 2)", dragon.get_position())
 
+    def test_dragon_can_be_set_at_any_position(self) -> None:
+        """A dragon should move to the position provided by the caller."""
+        dragon = Dragon(name="Wawelski")
+
+        dragon.set_position(position_x=1, position_y=2)
+
+        self.assertEqual(1, dragon.position_x)
+        self.assertEqual(2, dragon.position_y)
+
 
 if __name__ == "__main__":
     main()

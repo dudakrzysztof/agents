@@ -27,3 +27,8 @@ class Dragon:
     def get_position(self) -> str:
         """Return the dragon's current position as a coordinate string."""
         return f"({self.position_x}, {self.position_y})"
+
+    def set_position(self, position_x: int, position_y: int) -> None:
+        """Set the dragon's current position."""
+        self.position_x = position_x
+        self.position_y = position_y

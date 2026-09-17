@@ -18,6 +18,7 @@ The project currently supports:
 - Starting a dragon at the default position `(50, 100)`
 - Creating a dragon with custom `position_x` and `position_y` values
 - Returning the current position in the `(x, y)` format
+- Setting the current position with `Dragon.set_position()`
 
 ## Notes
 
@@ -27,3 +28,4 @@ The project currently supports:
 - Dragon health is randomly assigned between 50 and 100 (inclusive) using `random.randint()`.
 - Dragon coordinates are stored in `position_x` and `position_y`, defaulting to `50` and `100`, and can be customized at creation.
 - The current position is available through `Dragon.get_position()`.
+- The current position can be changed through `Dragon.set_position(position_x, position_y)`.
