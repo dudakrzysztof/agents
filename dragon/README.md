@@ -21,6 +21,7 @@ The project currently supports:
 - Returning the current position in the `(x, y)` format
 - Setting the current position with `Dragon.set_position()`
 - Moving right, left, down, or up by a requested value
+- Moving by relative x and y offsets with `Dragon.move()`
 
 ## Notes
 
@@ -34,4 +35,6 @@ The project currently supports:
 - Relative movement uses `Dragon.move_right()`, `Dragon.move_left()`,
   `Dragon.move_down()`, and `Dragon.move_up()`. Right and down increase the
   corresponding coordinate; left and up decrease it.
+- Combined movement uses `Dragon.move(x, y)`, where positive x moves right,
+  negative x moves left, positive y moves down, and negative y moves up.
 - Returning random damage between 5 and 20 through `Dragon.make_damage()`.

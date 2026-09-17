@@ -101,6 +101,14 @@ class DragonPositionBehaviorTestCase(TestCase):
 
         self._then_position_is(dragon, position_x=20, position_y=40)
 
+    def test_scenario_dragon_moves_by_x_and_y_offsets(self) -> None:
+        """A single call should move a dragon in two directions."""
+        dragon = self._given_dragon_at_position()
+
+        dragon.move(x=-25, y=35)
+
+        self._then_position_is(dragon, position_x=-15, position_y=55)
+
 
 class DragonDamageBehaviorTestCase(TestCase):
     """Cover the Sprint 08 damage scenario."""

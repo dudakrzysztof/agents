@@ -49,6 +49,11 @@ class Dragon:
         """Move the dragon up by the requested value."""
         self.position_y -= value
 
+    def move(self, x: int = 0, y: int = 0) -> None:
+        """Move by relative offsets: positive x is right and positive y is down."""
+        self.position_x += x
+        self.position_y += y
+
     def make_damage(self) -> int:
         """Return a random amount of damage between 5 and 20."""
         return randint(5, 20)

@@ -197,6 +197,15 @@ class DragonPositionTestCase(TestCase):
         self.assertEqual(20, dragon.position_x)
         self.assertEqual(40, dragon.position_y)
 
+    def test_dragon_moves_by_relative_x_and_y_offsets(self) -> None:
+        """A single move should apply arbitrary horizontal and vertical offsets."""
+        dragon = Dragon(name="Wawelski", position_x=10, position_y=20)
+
+        dragon.move(x=-25, y=35)
+
+        self.assertEqual(-15, dragon.position_x)
+        self.assertEqual(55, dragon.position_y)
+
 
 if __name__ == "__main__":
     main()
