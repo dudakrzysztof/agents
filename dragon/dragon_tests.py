@@ -53,11 +53,11 @@ class DragonPositionTestCase(TestCase):
     """Cover dragon position scenarios."""
 
     def test_dragon_has_default_position_on_creation(self) -> None:
-        """A created dragon should start at the origin."""
+        """A created dragon should start at the sprint-defined position."""
         dragon = Dragon(name="Wawelski")
 
-        self.assertEqual(0, dragon.x)
-        self.assertEqual(0, dragon.y)
+        self.assertEqual(50, dragon.x)
+        self.assertEqual(100, dragon.y)
 
     def test_dragon_can_be_created_with_initial_position(self) -> None:
         """A created dragon should retain its provided position."""
@@ -65,6 +65,14 @@ class DragonPositionTestCase(TestCase):
 
         self.assertEqual(50, dragon.x)
         self.assertEqual(100, dragon.y)
+
+    def test_dragon_returns_current_position(self) -> None:
+        """A dragon should return its current position in coordinate format."""
+        dragon = Dragon(name="Wawelski")
+        dragon.x = 1
+        dragon.y = 2
+
+        self.assertEqual("(1, 2)", dragon.get_position())
 
 
 if __name__ == "__main__":

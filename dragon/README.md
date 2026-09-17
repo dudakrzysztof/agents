@@ -15,8 +15,9 @@ The project currently supports:
 - Creating a `Dragon` instance with a `name` field
 - Validating that the dragon name is not empty (raises `DragonError` if empty)
 - Assigning random health points (50-100) to each dragon on creation
-- Starting a dragon at the default position `(x=0, y=0)`
+- Starting a dragon at the default position `(x=50, y=100)`
 - Creating a dragon with a custom initial `x` and `y` position
+- Returning the current position in the `(x, y)` format
 
 ## Notes
 
@@ -24,4 +25,5 @@ The project currently supports:
 - The solution is intentionally small and focused on the current acceptance criteria.
 - Dragon creation raises `DragonError` when the name is empty or contains only whitespace.
 - Dragon health is randomly assigned between 50 and 100 (inclusive) using `random.randint()`.
-- Dragon coordinates are set to `x=0` and `y=0` by default and can be customized at creation.
+- Dragon coordinates are set to `x=50` and `y=100` by default and can be customized at creation.
+- The current position is available through `Dragon.get_position()`.

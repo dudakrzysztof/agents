@@ -24,6 +24,7 @@ The Dragon project is an MVP business requirements exercise. Treat it as a progr
    - Run the test suite after implementation
    - Create a commit named `Sprint NN: ...`
    - Push only when the user explicitly requests it
+   - If changing the structure is a good solution, make the change and update repository structure in documentation and instructions.
 
 4. **Write tests**
    - Add tests for new behavior

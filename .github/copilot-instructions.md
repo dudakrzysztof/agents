@@ -21,6 +21,7 @@
 - Docstrings for functions and classes
 - Comments for complex logic
 - Keep functions focused and modular
+- Do not create single-letter variable names.
 
 ### Testing
 - Write tests alongside implementations
