@@ -85,19 +85,16 @@ class DragonPositionBehaviorTestCase(TestCase):
 
         self._then_position_is(dragon, position_x=9, position_y=19)
 
-    def test_use_case_movement_sequence(self) -> None:
-        """The Sprint 07 use case ends at position (20, 40)."""
+    def test_use_case_movement_sequence_with_move(self) -> None:
+        """The Sprint 07 use case works with combined relative movement."""
         dragon = Dragon(name="Wawelski")
         self.assertEqual("(50, 100)", dragon.get_position())
 
         dragon.set_position(position_x=10, position_y=20)
-        dragon.move_left(10)
-        dragon.move_down(20)
-        dragon.move_left(10)
-        dragon.move_right(15)
-        dragon.move_right(15)
-        dragon.move_up(5)
-        dragon.move_down(5)
+        dragon.move(x=-10, y=20)
+        dragon.move(x=5)
+        dragon.move(x=15, y=-5)
+        dragon.move(y=5)
 
         self._then_position_is(dragon, position_x=20, position_y=40)
 
