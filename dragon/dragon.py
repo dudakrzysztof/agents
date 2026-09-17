@@ -15,8 +15,8 @@ class Dragon:
 
     name: str
     health: int = 0
-    x: int = 50
-    y: int = 100
+    position_x: int = 50
+    position_y: int = 100
 
     def __post_init__(self) -> None:
         """Validate dragon attributes after initialization."""
@@ -26,4 +26,4 @@ class Dragon:
 
     def get_position(self) -> str:
         """Return the dragon's current position as a coordinate string."""
-        return f"({self.x}, {self.y})"
+        return f"({self.position_x}, {self.position_y})"

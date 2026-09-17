@@ -43,7 +43,10 @@ class DragonHealthTestCase(TestCase):
 
     def test_dragon_health_varies_between_creations(self) -> None:
         """Multiple dragons should have different health values."""
-        dragons = [Dragon(name=f"Dragon{i}") for i in range(10)]
+        dragons = [
+            Dragon(name=f"Dragon{dragon_index}")
+            for dragon_index in range(10)
+        ]
         health_values = [dragon.health for dragon in dragons]
 
         self.assertGreater(len(set(health_values)), 1)
@@ -56,21 +59,21 @@ class DragonPositionTestCase(TestCase):
         """A created dragon should start at the sprint-defined position."""
         dragon = Dragon(name="Wawelski")
 
-        self.assertEqual(50, dragon.x)
-        self.assertEqual(100, dragon.y)
+        self.assertEqual(50, dragon.position_x)
+        self.assertEqual(100, dragon.position_y)
 
     def test_dragon_can_be_created_with_initial_position(self) -> None:
         """A created dragon should retain its provided position."""
-        dragon = Dragon(name="Wawelski", x=50, y=100)
+        dragon = Dragon(name="Wawelski", position_x=50, position_y=100)
 
-        self.assertEqual(50, dragon.x)
-        self.assertEqual(100, dragon.y)
+        self.assertEqual(50, dragon.position_x)
+        self.assertEqual(100, dragon.position_y)
 
     def test_dragon_returns_current_position(self) -> None:
         """A dragon should return its current position in coordinate format."""
         dragon = Dragon(name="Wawelski")
-        dragon.x = 1
-        dragon.y = 2
+        dragon.position_x = 1
+        dragon.position_y = 2
 
         self.assertEqual("(1, 2)", dragon.get_position())
 
