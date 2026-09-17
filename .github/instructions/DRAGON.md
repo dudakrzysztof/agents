@@ -11,8 +11,7 @@ The Dragon project is an MVP business requirements exercise. Treat it as a progr
    - Ensure all tests pass before starting
 
 2. **Review sprint requirements**
-   - Read sprint at https://python3.info/dragon/polish/sprint-XX.html
-   - Do NOT read ahead into later sprints
+   - sprint requirements will be provided in the prompt
 
 3. **Implement focused solution**
    - Implement only what's requested
