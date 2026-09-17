@@ -7,6 +7,7 @@ This package contains the Dragon MVP used for the `python3.info` training tasks.
 - `dragon/__init__.py` exposes the public package API
 - `dragon/dragon.py` contains the core domain object
 - `dragon/dragon_tests.py` contains the unit tests
+- `dragon/dragon_behavioral_tests.py` contains behavioral acceptance tests
 - `dragon/README.md` documents the current sprint scope
 
 ## Current implementation
