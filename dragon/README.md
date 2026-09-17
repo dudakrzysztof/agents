@@ -29,6 +29,7 @@ dragon = Dragon(name="Wawelski")
 
 print(dragon.name)          # Wawelski
 print(dragon.health)        # A value from 50 to 100
+print(dragon.position)      # (50, 100)
 print(dragon.get_position())  # (50, 100)
 
 dragon.set_position(position_x=10, position_y=20)
@@ -88,11 +89,16 @@ except DragonError as error:
     print(error)
 ```
 
+Names must be strings. Initial and absolute position coordinates and all
+movement offsets must be integers (not booleans); invalid values raise
+`DragonError`. Coordinates and offsets may be negative.
+
 ## Public API
 
 | API | Description |
 | --- | --- |
 | `Dragon(name, position_x=50, position_y=100)` | Create a dragon with validated name and random health. |
+| `position` | Read the current position as an `(x, y)` tuple. |
 | `get_position()` | Return the current position as a string in `(x, y)` format. |
 | `set_position(position_x, position_y)` | Set an absolute position. |
 | `move(x=0, y=0)` | Apply relative horizontal and vertical offsets. |

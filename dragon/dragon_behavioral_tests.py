@@ -1,8 +1,9 @@
 """Behavioral acceptance tests for the Dragon project."""
 
 from unittest import TestCase, main
+from unittest.mock import patch
 
-from dragon import Dragon
+from dragon import Dragon, DragonError
 
 
 class DragonPositionBehaviorTestCase(TestCase):
@@ -105,6 +106,91 @@ class DragonPositionBehaviorTestCase(TestCase):
         dragon.move(x=-25, y=35)
 
         self._then_position_is(dragon, position_x=-15, position_y=55)
+
+    def test_scenario_position_is_available_as_a_read_only_tuple(self) -> None:
+        """Position has a tuple view while the existing string API still works."""
+        dragon = self._given_dragon_at_position()
+
+        dragon.move(x=-25, y=35)
+
+        self.assertEqual((-15, 55), dragon.position)
+        self.assertEqual("(-15, 55)", dragon.get_position())
+        with self.assertRaises(AttributeError):
+            dragon.position = (0, 0)
+        self.assertEqual((-15, 55), dragon.position)
+
+    def test_scenario_signed_coordinates_and_offsets_are_accepted(self) -> None:
+        """A dragon may start negative and move with signed integer offsets."""
+        dragon = Dragon(name="Wawelski", position_x=-10, position_y=-20)
+
+        dragon.set_position(position_x=-30, position_y=-40)
+        dragon.move(x=-5, y=7)
+        dragon.move_right(-2)
+        dragon.move_up(-3)
+
+        self.assertEqual((-37, -30), dragon.position)
+
+    def test_scenario_invalid_absolute_position_does_not_partially_move(self) -> None:
+        """Validation failure on the second coordinate leaves both unchanged."""
+        dragon = self._given_dragon_at_position()
+
+        with self.assertRaises(DragonError):
+            dragon.set_position(position_x=99, position_y=False)
+
+        self.assertEqual((10, 20), dragon.position)
+
+    def test_scenario_invalid_movement_offsets_raise_dragon_error(self) -> None:
+        """Combined and directional movement reject public non-integer inputs."""
+        scenarios = (
+            ("move", {"x": 1, "y": "down"}),
+            ("move_right", {"value": True}),
+            ("move_left", {"value": 1.5}),
+            ("move_down", {"value": None}),
+            ("move_up", {"value": False}),
+        )
+
+        for method_name, arguments in scenarios:
+            with self.subTest(method_name=method_name):
+                dragon = self._given_dragon_at_position()
+
+                with self.assertRaises(DragonError):
+                    getattr(dragon, method_name)(**arguments)
+
+                self.assertEqual((10, 20), dragon.position)
+
+
+class DragonCreationBehaviorTestCase(TestCase):
+    """Cover creation and validation acceptance scenarios."""
+
+    def test_scenario_health_uses_both_inclusive_random_bounds(self) -> None:
+        """Created dragons can receive the minimum and maximum health."""
+        with patch("dragon.dragon.randint", side_effect=[50, 100]):
+            minimum_health_dragon = Dragon(name="Minimum")
+            maximum_health_dragon = Dragon(name="Maximum")
+
+        self.assertEqual(50, minimum_health_dragon.health)
+        self.assertEqual(100, maximum_health_dragon.health)
+
+    def test_scenario_health_cannot_be_supplied_by_the_caller(self) -> None:
+        """The public constructor should not silently overwrite caller health."""
+        with self.assertRaises(TypeError):
+            Dragon(name="Wawelski", health=75)
+
+    def test_scenario_invalid_name_and_initial_coordinates_are_rejected(
+        self,
+    ) -> None:
+        """Public creation inputs use DragonError for invalid values."""
+        scenarios = (
+            {"name": None},
+            {"name": True},
+            {"name": "Wawelski", "position_x": False},
+            {"name": "Wawelski", "position_y": 2.5},
+        )
+
+        for arguments in scenarios:
+            with self.subTest(arguments=arguments):
+                with self.assertRaises(DragonError):
+                    Dragon(**arguments)
 
 
 class DragonDamageBehaviorTestCase(TestCase):
