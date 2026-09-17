@@ -86,6 +86,89 @@ class DragonPositionTestCase(TestCase):
         self.assertEqual(1, dragon.position_x)
         self.assertEqual(2, dragon.position_y)
 
+    def test_dragon_moves_right(self) -> None:
+        """Moving right should increase only the x coordinate."""
+        dragon = Dragon(name="Wawelski", position_x=10, position_y=20)
+
+        dragon.move_right(1)
+
+        self.assertEqual(11, dragon.position_x)
+        self.assertEqual(20, dragon.position_y)
+
+    def test_dragon_moves_left(self) -> None:
+        """Moving left should decrease only the x coordinate."""
+        dragon = Dragon(name="Wawelski", position_x=10, position_y=20)
+
+        dragon.move_left(1)
+
+        self.assertEqual(9, dragon.position_x)
+        self.assertEqual(20, dragon.position_y)
+
+    def test_dragon_moves_down(self) -> None:
+        """Moving down should increase only the y coordinate."""
+        dragon = Dragon(name="Wawelski", position_x=10, position_y=20)
+
+        dragon.move_down(1)
+
+        self.assertEqual(10, dragon.position_x)
+        self.assertEqual(21, dragon.position_y)
+
+    def test_dragon_moves_up(self) -> None:
+        """Moving up should decrease only the y coordinate."""
+        dragon = Dragon(name="Wawelski", position_x=10, position_y=20)
+
+        dragon.move_up(1)
+
+        self.assertEqual(10, dragon.position_x)
+        self.assertEqual(19, dragon.position_y)
+
+    def test_dragon_moves_horizontally(self) -> None:
+        """Opposing horizontal movements should accumulate on the x axis."""
+        dragon = Dragon(name="Wawelski", position_x=10, position_y=20)
+
+        dragon.move_right(1)
+        dragon.move_left(2)
+
+        self.assertEqual(9, dragon.position_x)
+        self.assertEqual(20, dragon.position_y)
+
+    def test_dragon_moves_vertically(self) -> None:
+        """Opposing vertical movements should accumulate on the y axis."""
+        dragon = Dragon(name="Wawelski", position_x=10, position_y=20)
+
+        dragon.move_down(1)
+        dragon.move_up(2)
+
+        self.assertEqual(10, dragon.position_x)
+        self.assertEqual(19, dragon.position_y)
+
+    def test_dragon_moves_omnidirectionally(self) -> None:
+        """Movement in all directions should update both coordinates."""
+        dragon = Dragon(name="Wawelski", position_x=10, position_y=20)
+
+        dragon.move_right(1)
+        dragon.move_left(2)
+        dragon.move_down(3)
+        dragon.move_up(4)
+
+        self.assertEqual(9, dragon.position_x)
+        self.assertEqual(19, dragon.position_y)
+
+    def test_dragon_applies_the_movement_use_case(self) -> None:
+        """The documented movement sequence should produce the final position."""
+        dragon = Dragon(name="Wawelski", position_x=10, position_y=20)
+
+        dragon.move_left(10)
+        dragon.move_down(20)
+        dragon.move_left(10)
+        dragon.move_right(15)
+        dragon.move_right(15)
+        dragon.move_up(5)
+        dragon.move_down(5)
+
+        self.assertEqual(20, dragon.position_x)
+        self.assertEqual(40, dragon.position_y)
+
 
 if __name__ == "__main__":
     main()

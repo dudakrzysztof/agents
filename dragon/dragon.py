@@ -32,3 +32,19 @@ class Dragon:
         """Set the dragon's current position."""
         self.position_x = position_x
         self.position_y = position_y
+
+    def move_right(self, value: int) -> None:
+        """Move the dragon right by the requested value."""
+        self.position_x += value
+
+    def move_left(self, value: int) -> None:
+        """Move the dragon left by the requested value."""
+        self.position_x -= value
+
+    def move_down(self, value: int) -> None:
+        """Move the dragon down by the requested value."""
+        self.position_y += value
+
+    def move_up(self, value: int) -> None:
+        """Move the dragon up by the requested value."""
+        self.position_y -= value

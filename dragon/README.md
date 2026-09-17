@@ -19,6 +19,7 @@ The project currently supports:
 - Creating a dragon with custom `position_x` and `position_y` values
 - Returning the current position in the `(x, y)` format
 - Setting the current position with `Dragon.set_position()`
+- Moving right, left, down, or up by a requested value
 
 ## Notes
 
@@ -29,3 +30,6 @@ The project currently supports:
 - Dragon coordinates are stored in `position_x` and `position_y`, defaulting to `50` and `100`, and can be customized at creation.
 - The current position is available through `Dragon.get_position()`.
 - The current position can be changed through `Dragon.set_position(position_x, position_y)`.
+- Relative movement uses `Dragon.move_right()`, `Dragon.move_left()`,
+  `Dragon.move_down()`, and `Dragon.move_up()`. Right and down increase the
+  corresponding coordinate; left and up decrease it.
