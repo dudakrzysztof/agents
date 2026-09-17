@@ -1,40 +1,120 @@
 # Dragon
 
-This package contains the Dragon MVP used for the `python3.info` training tasks.
+Dragon is a small, dependency-free Python domain model for representing a
+dragon with health, a two-dimensional position, movement, and random damage.
+It is designed as an educational MVP and as a simple foundation for
+coordinate-based game or simulation prototypes.
+
+## Features
+
+- Create a named dragon with automatic validation.
+- Assign random health between 50 and 100 inclusive at creation time.
+- Start at `(50, 100)` or provide a custom initial position.
+- Read or set the absolute position.
+- Move by a signed `(x, y)` offset in one operation.
+- Move in a single direction when a directional method is more expressive.
+- Generate random damage between 5 and 20 inclusive.
+
+## Requirements
+
+- Python 3.14 or later
+- Python standard library only
+
+## Quick start
+
+```python
+from dragon import Dragon
+
+dragon = Dragon(name="Wawelski")
+
+print(dragon.name)          # Wawelski
+print(dragon.health)        # A value from 50 to 100
+print(dragon.get_position())  # (50, 100)
+
+dragon.set_position(position_x=10, position_y=20)
+dragon.move(x=-25, y=35)
+
+print(dragon.get_position())  # (-15, 55)
+```
+
+`Dragon.move()` applies relative offsets. Positive `x` moves right, negative
+`x` moves left, positive `y` moves down, and negative `y` moves up.
+
+## Usage examples
+
+### Combining horizontal and vertical movement
+
+Use one `move()` call instead of invoking several single-direction methods:
+
+```python
+dragon.set_position(position_x=10, position_y=20)
+dragon.move(x=15, y=-5)
+
+assert dragon.get_position() == "(25, 15)"
+```
+
+### Moving in one direction
+
+Directional methods remain available when they make the intent clearer:
+
+```python
+dragon.move_right(10)
+dragon.move_left(4)
+dragon.move_down(20)
+dragon.move_up(5)
+```
+
+### Generating damage
+
+```python
+damage = dragon.make_damage()
+
+assert 5 <= damage <= 20
+```
+
+The damage value is returned to the caller; the current implementation does
+not apply damage to another object or reduce the dragon's own health.
+
+### Handling invalid names
+
+An empty or whitespace-only name raises `DragonError`:
+
+```python
+from dragon import Dragon, DragonError
+
+try:
+    Dragon(name=" ")
+except DragonError as error:
+    print(error)
+```
+
+## Public API
+
+| API | Description |
+| --- | --- |
+| `Dragon(name, position_x=50, position_y=100)` | Create a dragon with validated name and random health. |
+| `get_position()` | Return the current position as a string in `(x, y)` format. |
+| `set_position(position_x, position_y)` | Set an absolute position. |
+| `move(x=0, y=0)` | Apply relative horizontal and vertical offsets. |
+| `move_right(value)` / `move_left(value)` | Change the x coordinate. |
+| `move_down(value)` / `move_up(value)` | Change the y coordinate. |
+| `make_damage()` | Return a random integer from 5 to 20 inclusive. |
 
 ## Project structure
 
-- `dragon/__init__.py` exposes the public package API
-- `dragon/dragon.py` contains the core domain object
-- `dragon/dragon_tests.py` contains the unit tests
-- `dragon/dragon_behavioral_tests.py` contains behavioral acceptance tests
-- `dragon/README.md` documents the current sprint scope
+```text
+dragon/
+├── __init__.py                 Public package API
+├── dragon.py                   Dragon and DragonError implementations
+├── dragon_tests.py             Unit and regression tests
+├── dragon_behavioral_tests.py  Behavioral acceptance tests
+└── README.md                   Project documentation
+```
 
-## Current implementation
+## Running the tests
 
-The project currently supports:
-- Creating a `Dragon` instance with a `name` field
-- Validating that the dragon name is not empty (raises `DragonError` if empty)
-- Assigning random health points (50-100) to each dragon on creation
-- Starting a dragon at the default position `(50, 100)`
-- Creating a dragon with custom `position_x` and `position_y` values
-- Returning the current position in the `(x, y)` format
-- Setting the current position with `Dragon.set_position()`
-- Moving right, left, down, or up by a requested value
-- Moving by relative x and y offsets with `Dragon.move()`
+Run the complete test suite from the repository root:
 
-## Notes
-
-- The implementation uses only the Python standard library.
-- The solution is intentionally small and focused on the current acceptance criteria.
-- Dragon creation raises `DragonError` when the name is empty or contains only whitespace.
-- Dragon health is randomly assigned between 50 and 100 (inclusive) using `random.randint()`.
-- Dragon coordinates are stored in `position_x` and `position_y`, defaulting to `50` and `100`, and can be customized at creation.
-- The current position is available through `Dragon.get_position()`.
-- The current position can be changed through `Dragon.set_position(position_x, position_y)`.
-- Relative movement uses `Dragon.move_right()`, `Dragon.move_left()`,
-  `Dragon.move_down()`, and `Dragon.move_up()`. Right and down increase the
-  corresponding coordinate; left and up decrease it.
-- Combined movement uses `Dragon.move(x, y)`, where positive x moves right,
-  negative x moves left, positive y moves down, and negative y moves up.
-- Returning random damage between 5 and 20 through `Dragon.make_damage()`.
+```powershell
+python -m unittest dragon.dragon_tests dragon.dragon_behavioral_tests -v
+```
