@@ -1,54 +1,55 @@
-# Writing Prompts
+# Task Brief Template
 
-## Principles
+Use this template to prepare the brief handed from Orchestrator to Developer.
+The linked instruction files are the source of shared rules; reference them
+instead of copying their contents into every brief.
 
-Keep prompts focused, clear, and actionable:
+```text
+[Task name]
 
-1. **State the goal** - What needs to be done?
-2. **Define success criteria** - How do we verify it's complete?
-3. **Scope clearly** - What is included/excluded?
-4. **Set constraints** - Implementation limits (standard library, no extra features)
-5. **Request validation** - How should the solution be tested?
-6. **Avoid redundancy** - Reference guidelines instead of repeating them
+Goal:
+- What outcome should the user get?
 
-## Prompt Template
+Scope:
+- What is included?
+- What is explicitly out of scope?
 
-```
-[Task Name]
-
-Description:
-- Clear statement of what needs to be implemented
+Non-goals:
+- What must not be changed or added?
 
 Requirements:
-- Specific feature/change requested
-- Any acceptance criteria
-- Scope boundaries
+- Task-specific behavior and acceptance criteria.
 
-Constraints:
-- Implementation limits (e.g., standard library only)
-- Code style preferences if needed
+Assumptions:
+- Decisions made because the request or requirements are ambiguous.
+
+Affected files:
+- Existing files or areas expected to change.
 
 Validation:
-- How to test/verify the solution
-- Which tests should pass
-- Any edge cases to consider
+- Existing commands or checks that prove the requirements.
+- Relevant edge cases.
 
-Reference:
-- Link to relevant documentation/guidelines
-- Previous work/commits if applicable
+Risks:
+- Known compatibility, migration, or implementation risks.
+
+References:
+- Selected sprint file and relevant implementation or documentation.
 ```
 
-## Best Practices
+## Authoring rules
 
-- **Be specific**: "Add health attribute to Dragon" not "improve Dragon"
-- **Reference existing work**: Extend previous features, don't rewrite
-- **Mention constraints early**: Standard library, no external dependencies
-- **Ask for tests**: Behavior verification is essential
-- **Keep it brief**: Detail matters, verbosity doesn't
+- State the requested behavior precisely and keep the brief concise.
+- Include only task-specific constraints; do not repeat repository or project
+  instructions.
+- Fill every section; write `None` when a section does not apply.
+- Treat inherited sprint behavior as existing scope unless the sprint changes it.
+- Reference existing implementation and documentation instead of proposing a
+  rewrite.
+- Make every acceptance criterion verifiable by a test or an explicit check.
 
-## Reference
+## Instruction references
 
-- Implementation guidelines: [copilot-instructions.md](../copilot-instructions.md)
-- Project-specific details: [dragon.instructions.md](../instructions/dragon.instructions.md)
-
-
+- [Repository standards](../copilot-instructions.md)
+- [Dragon workflow](../instructions/dragon.instructions.md)
+- [Orchestrator role](../agents/orchestrator.agent.md)
